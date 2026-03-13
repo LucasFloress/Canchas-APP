@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('canchas', function (Blueprint $table) {
             $table->id();
+            $table->string('numero');
+            $table->decimal('precio_base',10,2);
             $table->timestamps();
         });
     }

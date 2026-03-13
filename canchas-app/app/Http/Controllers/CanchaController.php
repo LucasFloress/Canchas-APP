@@ -2,63 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cancha;
 use Illuminate\Http\Request;
 
 class CanchaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $canchas = Cancha::withCount('reservas')->get();
+        return view('canchas.index', compact('canchas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('canchas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'numero' => 'required|string|max:255',
+            'precio_base'     => 'required|numeric|min:0',
+        ]);
+
+        Cancha::create($request->only('numero', 'precio_base'));
+
+        return redirect()->route('canchas.index')->with('success', 'Cancha creada correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Cancha $cancha)
     {
-        //
+        return view('canchas.edit', compact('cancha'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Cancha $cancha)
     {
-        //
+        $request->validate([
+            'numero' => 'required|string|max:255',
+            'precio_base'     => 'required|numeric|min:0',
+        ]);
+
+        $cancha->update($request->only('numero', 'precio_base'));
+
+        return redirect()->route('canchas.index')->with('success', 'Cancha actualizada correctamente.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Cancha $cancha)
     {
-        //
+        if ($cancha->reservas()->where('estado_reserva', 'reservado')->exists()) {
+            return redirect()->route('canchas.index')->with('error', 'No se puede eliminar una cancha con reservas activas.');
+        }
+
+        $cancha->delete();
+        return redirect()->route('canchas.index')->with('success', 'Cancha eliminada.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function show(Cancha $cancha)
     {
-        //
+        return redirect()->route('canchas.index');
     }
 }

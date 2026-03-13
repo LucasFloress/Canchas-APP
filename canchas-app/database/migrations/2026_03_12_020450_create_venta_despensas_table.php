@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('venta_despensas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('producto_id')->constrained('productos')->onDelete('restrict');
+            $table->integer('cantidad');
+            $table->decimal('total_venta', 10, 2);
+            $table->string('metodo_pago');
             $table->timestamps();
         });
     }
