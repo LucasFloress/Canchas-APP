@@ -21,7 +21,7 @@
                     <select name="cancha_id" class="w-full border-gray-300 rounded-lg shadow-sm" required>
                         @foreach($canchas as $cancha)
                             <option value="{{ $cancha->id }}" {{ $reserva->cancha_id == $cancha->id ? 'selected' : '' }}>
-                                {{ $cancha->numero_o_nombre }}
+                                {{ $cancha->numero }}
                             </option>
                         @endforeach
                     </select>

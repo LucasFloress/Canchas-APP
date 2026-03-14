@@ -167,7 +167,7 @@
                             <div class="flex items-start justify-between">
                                 <div>
                                     <p class="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">Cancha</p>
-                                    <h3 class="text-white text-xl font-bold tracking-tight">{{ $cancha->numero_o_nombre }}</h3>
+                                    <h3 class="text-white text-xl font-bold tracking-tight">{{ $cancha->numero }}</h3>
                                 </div>
                                 <div class="bg-blue-600 rounded-xl px-3 py-1.5 text-white text-sm font-bold">
                                     ${{ number_format($cancha->precio_base, 0, ',', '.') }}

@@ -16,6 +16,11 @@ class ProductoController extends Controller
         $query->where('categoria', $request->categoria);
     }
 
+    // Filtro por nombre
+    if ($request->filled('buscar')) {
+        $query->where('nombre', 'like', '%' . $request->buscar . '%');
+    }
+
     // Filtro por stock
     if ($request->filled('stock')) {
         match($request->stock) {

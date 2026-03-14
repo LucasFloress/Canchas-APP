@@ -30,7 +30,7 @@
                 <tbody class="divide-y divide-gray-100">
                     @forelse($reservas as $reserva)
                     <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 font-medium">{{ $reserva->cancha->numero_o_nombre }}</td>
+                        <td class="px-4 py-3 font-medium">{{ $reserva->cancha->numero }}</td>
                         <td class="px-4 py-3">{{ $reserva->cliente_nombre }}</td>
                         <td class="px-4 py-3">{{ $reserva->fecha_reserva->format('d/m/Y') }}</td>
                         <td class="px-4 py-3">{{ substr($reserva->horario_inicio, 0, 5) }} - {{ substr($reserva->horario_fin, 0, 5) }}</td>

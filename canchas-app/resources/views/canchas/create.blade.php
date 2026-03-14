@@ -155,7 +155,7 @@
                                 id="input-nombre"
                                 value="{{ old('numero') }}"
                                 placeholder="Ej: Cancha 1, Cancha Techada, Cancha de Futsal"
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm @error('numero_o_nombre') border-red-400 @enderror"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm @error('numero') border-red-400 @enderror"
                                 required
                             >
                             @error('numero')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror

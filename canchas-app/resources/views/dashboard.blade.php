@@ -222,7 +222,7 @@
                                     <span class="font-mono text-gray-500">{{ substr($reserva->horario_inicio, 0, 5) }} - {{ substr($reserva->horario_fin, 0, 5) }}</span>
                                 </td>
                                 <td class="py-3 px-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ $reserva->cliente_nombre }}</td>
-                                <td class="py-3 px-4 whitespace-nowrap text-sm text-gray-600">{{ $reserva->cancha->numero_o_nombre }}</td>
+                                <td class="py-3 px-4 whitespace-nowrap text-sm text-gray-600">{{ $reserva->cancha->numero }}</td>
                                 <td class="py-3 px-4 whitespace-nowrap text-sm font-semibold text-gray-800">${{ number_format($reserva->precio_total, 0, ',', '.') }}</td>
                                 <td class="py-3 px-4 whitespace-nowrap">
                                     @php

@@ -66,11 +66,22 @@ class VentaDespensaController extends Controller
         return redirect()->route('ventas-despensa.index');
     }
 
-    public function destroy(VentaDespensa $ventaDespensa)
+    public function destroy($id)
     {
         // Restaurar stock al anular venta
-        $ventaDespensa->producto->increment('stock', $ventaDespensa->cantidad);
-        $ventaDespensa->delete();
-        return redirect()->route('ventas-despensa.index')->with('success', 'Venta anulada y stock restaurado.');
+        
+        // 1. Buscamos la venta
+        $venta = \App\Models\VentaDespensa::findOrFail($id);
+
+        // 2. ¡La validación clave! Solo devolvemos el stock si el producto aún existe
+        if ($venta->producto) {
+            $venta->producto->increment('stock', $venta->cantidad);
+        }
+
+        // 3. Eliminamos el registro de la venta
+        $venta->delete();
+
+        return redirect()->route('ventas-despensa.index')
+            ->with('success', 'Venta eliminada correctamente.');
     }
 }
