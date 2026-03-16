@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Reserva;
 use App\Models\Cancha;
 use Illuminate\Http\Request;
-
 class ReservaController extends Controller
 {
     public function index()
@@ -14,16 +11,13 @@ class ReservaController extends Controller
             ->orderBy('fecha_reserva', 'desc')
             ->orderBy('horario_inicio', 'asc')
             ->paginate(15);
-
         return view('reservas.index', compact('reservas'));
     }
-
     public function create()
     {
         $canchas = Cancha::all();
         return view('reservas.create', compact('canchas'));
     }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -43,37 +37,29 @@ class ReservaController extends Controller
             ->where('fecha_reserva', $validated['fecha_reserva'])
             ->where('estado_reserva', '!=', 'cancelado')
             ->where(function ($q) use ($validated) {
-                $q->whereBetween('horario_inicio', [$validated['horario_inicio'], $validated['horario_fin']])
-                  ->orWhereBetween('horario_fin', [$validated['horario_inicio'], $validated['horario_fin']])
-                  ->orWhere(function ($q) use ($validated) {
-                      $q->where('horario_inicio', '<=', $validated['horario_inicio'])
-                        ->where('horario_fin', '>=', $validated['horario_fin']);
-                  });
+                $q->where('horario_inicio', '<', $validated['horario_fin'])
+                  ->where('horario_fin',    '>', $validated['horario_inicio']);
             })->exists();
 
         if ($solapamiento) {
             return back()->withErrors(['horario_inicio' => 'Ya existe una reserva en ese horario para esa cancha.'])->withInput();
         }
 
-        $validated['monto_senia']   = $validated['monto_senia'] ?? 0;
+        $validated['monto_senia']    = $validated['monto_senia'] ?? 0;
         $validated['estado_reserva'] = 'reservado';
-
         Reserva::create($validated);
 
         return redirect()->route('reservas.index')->with('success', 'Reserva creada correctamente.');
     }
-
     public function show(Reserva $reserva)
     {
         return view('reservas.show', compact('reserva'));
     }
-
     public function edit(Reserva $reserva)
     {
         $canchas = Cancha::all();
         return view('reservas.edit', compact('reserva', 'canchas'));
     }
-
     public function update(Request $request, Reserva $reserva)
     {
         $validated = $request->validate([
@@ -89,13 +75,25 @@ class ReservaController extends Controller
             'estado_reserva' => 'required|in:disponible,reservado,cancelado,completado',
         ]);
 
-        $validated['monto_senia'] = $validated['monto_senia'] ?? 0;
+        // Verificar solapamiento excluyendo la reserva actual
+        $solapamiento = Reserva::where('cancha_id', $validated['cancha_id'])
+            ->where('fecha_reserva', $validated['fecha_reserva'])
+            ->where('estado_reserva', '!=', 'cancelado')
+            ->where('id', '!=', $reserva->id)
+            ->where(function ($q) use ($validated) {
+                $q->where('horario_inicio', '<', $validated['horario_fin'])
+                  ->where('horario_fin',    '>', $validated['horario_inicio']);
+            })->exists();
 
+        if ($solapamiento) {
+            return back()->withErrors(['horario_inicio' => 'Ya existe una reserva en ese horario para esa cancha.'])->withInput();
+        }
+
+        $validated['monto_senia'] = $validated['monto_senia'] ?? 0;
         $reserva->update($validated);
 
         return redirect()->route('reservas.index')->with('success', 'Reserva actualizada correctamente.');
     }
-
     public function destroy(Reserva $reserva)
     {
         $reserva->update(['estado_reserva' => 'cancelado']);

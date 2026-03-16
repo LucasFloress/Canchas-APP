@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reserva extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'cancha_id', 'fecha_reserva', 'horario_inicio', 'horario_fin',
         'cliente_nombre', 'estado_reserva', 'precio_total',
