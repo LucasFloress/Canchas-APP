@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CanchaController;
-use App\Http\Controllers\ReservaController;
-use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\VentaDespensaController;
-use App\Http\Controllers\FinanzasController;
-use App\Http\Controllers\PublicController;
 
 // ─────────────────────────────────────────────
 // RUTAS PÚBLICAS —
@@ -37,5 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('ventas-despensa', VentaDespensaController::class);
     Route::get('/finanzas/reporte', [FinanzasController::class, 'reporte'])->name('finanzas.reporte');
 });
+
+// Nuevo endpoint para obtener la lista de canchas
+Route::get('/canchas', [CanchaController::class, 'index'])->name('canchas.index');
 
 require __DIR__.'/auth.php';
