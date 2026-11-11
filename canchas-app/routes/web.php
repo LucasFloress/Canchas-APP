@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CanchaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ProductoController;

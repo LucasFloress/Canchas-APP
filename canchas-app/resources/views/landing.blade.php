@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Canchas Javi — Villa Tesei</title>
+    <title>Canchas Potrero — Villa Tesei</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,11 +23,10 @@
         /* ── Campo de fútbol SVG background ── */
         .hero-bg {
             background-color: #060f06;
-            background-image:
-                /* líneas del campo */
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 60px 60px;
+            background-image: url('{{ asset('../image/cancha-background.png') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         .hero-bg::before {
             content: '';
