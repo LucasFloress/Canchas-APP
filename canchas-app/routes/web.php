@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CanchaController;
 
 // ─────────────────────────────────────────────
@@ -19,7 +20,6 @@ Route::post('/reservar', [PublicController::class, 'storeReserva'])->name('reser
 
 Route::get('/profile', function () { return "Página de perfil en construcción"; })->name('profile.edit');
 
-
 // ─────────────────────────────────────────────
 // RUTAS PRIVADAS
 // ─────────────────────────────────────────────
@@ -33,7 +33,40 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/finanzas/reporte', [FinanzasController::class, 'reporte'])->name('finanzas.reporte');
 });
 
+<<<<<<< HEAD
 // Nuevo endpoint para obtener la lista de canchas
 Route::get('/canchas', [CanchaController::class, 'index'])->name('canchas.index');
 
 require __DIR__.'/auth.php';
+=======
+// ─────────────────────────────────────────────
+// RUTAS DE ADMIN
+// ─────────────────────────────────────────────
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Rutas solo para admins NO autenticados
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('login',  [LoginController::class, 'showLoginForm'])->name('login');
+        Route::post('login', [LoginController::class, 'login']);
+
+        Route::get('forgot-password',        [PasswordController::class, 'showForgotForm'])->name('password.request');
+        Route::post('forgot-password',       [PasswordController::class, 'sendResetLink'])->name('password.email');
+        Route::get('reset-password/{token}', [PasswordController::class, 'showResetForm'])->name('password.reset');
+        Route::post('reset-password',        [PasswordController::class, 'resetPassword'])->name('password.update');
+    });
+
+    // Rutas solo para admins autenticados
+    Route::middleware('auth:admin')->group(function () {
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+        Route::get('dashboard', fn() => view('admin.dashboard'))->name('dashboard');
+    });
+});
+
+// ─────────────────────────────────────────────
+// RUTA LOGIN
+// ─────────────────────────────────────────────
+Route::get("/login", [AuthenticatedSessionController::class, 'create'])->name("auth.login");
+
+
+require __DIR__.'/auth.php';
+>>>>>>> 66e86f7583b8bc4c5e5e7e24d7c2c2f9c06bb8ae

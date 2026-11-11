@@ -39,8 +39,14 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver'   => 'session',
             'provider' => 'users',
+        ],
+
+        // Guard exclusivo para admins
+        'admin' => [
+            'driver'   => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -64,14 +70,20 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', User::class),
+            'model'  => App\Models\User::class,
         ],
+
+        // Provider que apunta al modelo Admin
+        'admins' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Admin::class,
+        ],
+    ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -95,8 +107,16 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
+            'table'    => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire'   => 60,
+            'throttle' => 60,
+        ],
+
+        // Broker de reset exclusivo para admins
+        'admins' => [
+            'provider' => 'admins',
+            'table'    => 'admin_password_reset_tokens',
+            'expire'   => 30,
             'throttle' => 60,
         ],
     ],
