@@ -27,7 +27,7 @@ class CanchaController extends Controller
 
         Cancha::create($request->only('numero', 'precio_base'));
 
-        return redirect()->route('canchas.index')->with('success', 'Cancha creada correctamente.');
+        return redirect()->route('admin.canchas.index')->with('success', 'Cancha creada correctamente.');
     }
 
     public function edit(Cancha $cancha)
@@ -44,21 +44,21 @@ class CanchaController extends Controller
 
         $cancha->update($request->only('numero', 'precio_base'));
 
-        return redirect()->route('canchas.index')->with('success', 'Cancha actualizada correctamente.');
+        return redirect()->route('admin.canchas.index')->with('success', 'Cancha actualizada correctamente.');
     }
 
     public function destroy(Cancha $cancha)
     {
         if ($cancha->reservas()->where('estado_reserva', 'reservado')->exists()) {
-            return redirect()->route('canchas.index')->with('error', 'No se puede eliminar una cancha con reservas activas.');
+            return redirect()->route('admin.canchas.index')->with('error', 'No se puede eliminar una cancha con reservas activas.');
         }
 
         $cancha->delete();
-        return redirect()->route('canchas.index')->with('success', 'Cancha eliminada.');
+        return redirect()->route('admin.canchas.index')->with('success', 'Cancha eliminada.');
     }
 
     public function show(Cancha $cancha)
     {
-        return redirect()->route('canchas.index');
+        return redirect()->route('admin.canchas.index');
     }
 }

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="text-xl font-semibold text-gray-800">Reportes de Finanzas</h2>
-            <a href="{{ route('dashboard') }}" class="text-sm text-gray-500 hover:underline">← Volver al Dashboard</a>
+            <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-500 hover:underline">← Volver al Dashboard</a>
         </div>
     </x-slot>
 

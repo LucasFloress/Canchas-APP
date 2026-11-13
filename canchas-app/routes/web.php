@@ -3,51 +3,32 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CanchaController;
+use App\Http\Controllers\FinanzasController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\VentaDespensaController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\PasswordController;
+use Illuminate\Auth\Middleware\Authenticate;
 
 // ─────────────────────────────────────────────
-// RUTAS PÚBLICAS —
+// RUTAS PÚBLICAS
 // ─────────────────────────────────────────────
-
-// Landing Page
 Route::get('/', [PublicController::class, 'index'])->name('landing');
-
-// API: horarios ocupados (llamada AJAX desde el frontend)
-Route::get('/api/horarios-disponibles', [PublicController::class, 'getHorariosDisponibles'])
-    ->name('api.horarios');
-
-// Procesar reserva pública
+Route::get('/api/horarios-disponibles', [PublicController::class, 'getHorariosDisponibles'])->name('api.horarios');
 Route::post('/reservar', [PublicController::class, 'storeReserva'])->name('reserva.publica.store');
-
 Route::get('/profile', function () { return "Página de perfil en construcción"; })->name('profile.edit');
 
 // ─────────────────────────────────────────────
-// RUTAS PRIVADAS
-// ─────────────────────────────────────────────
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [FinanzasController::class, 'index'])->name('dashboard');
-    Route::resource('canchas', CanchaController::class);
-    Route::resource('reservas', ReservaController::class);
-    Route::resource('productos', ProductoController::class);
-    Route::resource('ventas-despensa', VentaDespensaController::class);
-    Route::get('/finanzas/reporte', [FinanzasController::class, 'reporte'])->name('finanzas.reporte');
-});
-
-<<<<<<< HEAD
-// Nuevo endpoint para obtener la lista de canchas
-Route::get('/canchas', [CanchaController::class, 'index'])->name('canchas.index');
-
-require __DIR__.'/auth.php';
-=======
-// ─────────────────────────────────────────────
-// RUTAS DE ADMIN
+// RUTAS DE ADMIN (Protegidas)
 // ─────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    // Rutas solo para admins NO autenticados
+    // 1. Admins NO autenticados (Login)
     Route::middleware('guest:admin')->group(function () {
         Route::get('login',  [LoginController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [LoginController::class, 'login']);
+        Route::post('login', [LoginController::class, 'login'])->name('login.submit');
 
         Route::get('forgot-password',        [PasswordController::class, 'showForgotForm'])->name('password.request');
         Route::post('forgot-password',       [PasswordController::class, 'sendResetLink'])->name('password.email');
@@ -55,18 +36,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('reset-password',        [PasswordController::class, 'resetPassword'])->name('password.update');
     });
 
-    // Rutas solo para admins autenticados
+    // 2. Admins AUTENTICADOS (El Panel)
     Route::middleware('auth:admin')->group(function () {
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-        Route::get('dashboard', fn() => view('admin.dashboard'))->name('dashboard');
+        
+        // Esta es la ruta que Laravel no encontraba:
+        Route::get('dashboard', [FinanzasController::class, 'index'])->name('dashboard');
+        
+        // Gestión de recursos
+        Route::resource('canchas', CanchaController::class);
+        Route::resource('reservas', ReservaController::class);
+        Route::resource('productos', ProductoController::class);
+        Route::resource('ventas-despensa', VentaDespensaController::class);
+        Route::get('/finanzas/reporte', [FinanzasController::class, 'reporte'])->name('finanzas.reporte');
     });
 });
 
 // ─────────────────────────────────────────────
-// RUTA LOGIN
+// RUTA LOGIN POR DEFECTO
 // ─────────────────────────────────────────────
 Route::get("/login", [AuthenticatedSessionController::class, 'create'])->name("auth.login");
 
-
 require __DIR__.'/auth.php';
->>>>>>> 66e86f7583b8bc4c5e5e7e24d7c2c2f9c06bb8ae

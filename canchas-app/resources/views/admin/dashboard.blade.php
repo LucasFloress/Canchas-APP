@@ -49,36 +49,36 @@
         <nav class="flex-1 px-3 py-4 space-y-1">
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider px-3 mb-2">Principal</p>
 
-            <a href="/dashboard" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white text-sm font-medium">
+            <a href="{{ route('admin.dashboard') }}" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white text-sm font-medium">
                 <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                 Inicio
             </a>
 
-            <a href="/reservas" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
+            <a href="{{ route('admin.reservas.index') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 Reservas
             </a>
 
-            <a href="/canchas" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
+            <a href="{{ route('admin.canchas.index') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
                 Canchas
             </a>
 
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider px-3 mb-2 mt-5">Comercio</p>
 
-            <a href="/productos" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
+            <a href="{{ route('admin.productos.index') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                 Productos
             </a>
 
-            <a href="/ventas-despensa" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
+            <a href="{{ route('admin.ventas-despensa.index') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                 Despensa
             </a>
 
             <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider px-3 mb-2 mt-5">Reportes</p>
 
-            <a href="/finanzas/reporte" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
+            <a href="{{ route('admin.finanzas.reporte') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:text-white text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                 Finanzas
             </a>
@@ -94,7 +94,7 @@
                     <p class="text-white text-xs font-semibold truncate">{{ auth()->user()->name ?? 'Admin' }}</p>
                     <p class="text-slate-400 text-xs truncate">{{ auth()->user()->email ?? '' }}</p>
                 </div>
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
                     <button class="text-slate-400 hover:text-white transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
@@ -114,11 +114,11 @@
                 <p class="text-xs text-gray-400">{{ \Carbon\Carbon::now()->isoFormat('dddd D [de] MMMM, YYYY') }}</p>
             </div>
             <div class="flex items-center gap-3">
-                <a href="/reservas/create" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm flex items-center gap-2">
+                <a href="{{ route('admin.reservas.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     Nueva Reserva
                 </a>
-                <a href="/ventas-despensa/create" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium text-sm flex items-center gap-2">
+                <a href="{{ route('admin.ventas-despensa.create') }}" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium text-sm flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     Venta Despensa
                 </a>
@@ -137,7 +137,7 @@
                 <p class="text-yellow-800 text-sm font-medium">
                     Tenés <strong>{{ $reservasPendientes }}</strong> reserva{{ $reservasPendientes > 1 ? 's' : '' }} con pago pendiente.
                 </p>
-                <a href="/reservas" class="ml-auto text-yellow-700 text-sm font-semibold hover:underline">Ver reservas →</a>
+                <a href="{{ route('admin.reservas.index') }}" class="ml-auto text-yellow-700 text-sm font-semibold hover:underline">Ver reservas →</a>
             </div>
             @endif
 
@@ -201,7 +201,7 @@
                 <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
                         <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wider">📅 Reservas de Hoy</h2>
-                        <a href="/reservas" class="text-blue-600 text-xs font-medium hover:underline">Ver todas →</a>
+                        <a href="{{ route('admin.reservas.index') }}" class="text-blue-600 text-xs font-medium hover:underline">Ver todas →</a>
                     </div>
 
                     @if(isset($proximasReservas) && $proximasReservas->count() > 0)
@@ -219,7 +219,7 @@
                             @foreach($proximasReservas as $reserva)
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="py-3 px-4 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="font-mono text-gray-500">{{ substr($reserva->horario_inicio, 0, 5) }} - {{ substr($reserva->horario_fin, 0, 5) }}</span>
+                                     <span class="font-mono text-gray-500">{{ substr($reserva->horario_inicio, 0, 5) }} - {{ substr($reserva->horario_fin, 0, 5) }}</span>
                                 </td>
                                 <td class="py-3 px-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ $reserva->cliente_nombre }}</td>
                                 <td class="py-3 px-4 whitespace-nowrap text-sm text-gray-600">{{ $reserva->cancha->numero }}</td>
@@ -247,7 +247,7 @@
                     <div class="flex flex-col items-center justify-center py-12 text-gray-400">
                         <svg class="w-10 h-10 mb-3 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <p class="text-sm">No hay reservas para hoy</p>
-                        <a href="/reservas/create" class="mt-3 text-blue-600 text-xs font-medium hover:underline">+ Crear una reserva</a>
+                        <a href="{{ route('admin.reservas.create') }}" class="mt-3 text-blue-600 text-xs font-medium hover:underline">+ Crear una reserva</a>
                     </div>
                     @endif
                 </div>

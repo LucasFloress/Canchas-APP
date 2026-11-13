@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="text-xl font-semibold text-gray-800">Reservas</h2>
-            <a href="{{ route('reservas.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">+ Nueva Reserva</a>
+            <a href="{{ route('admin.reservas.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">+ Nueva Reserva</a>
         </div>
     </x-slot>
 
@@ -54,8 +54,8 @@
                             </span>
                         </td>
                         <td class="px-4 py-3 flex gap-2">
-                            <a href="{{ route('reservas.edit', $reserva) }}" class="text-blue-600 hover:underline text-xs">Editar</a>
-                            <form action="{{ route('reservas.destroy', $reserva) }}" method="POST" onsubmit="return confirm('¿Cancelar esta reserva?')">
+                            <a href="{{ route('admin.reservas.edit', $reserva) }}" class="text-blue-600 hover:underline text-xs">Editar</a>
+                            <form action="{{ route('admin.reservas.destroy', $reserva) }}" method="POST" onsubmit="return confirm('¿Cancelar esta reserva?')">
                                 @csrf @method('DELETE')
                                 <button class="text-red-500 hover:underline text-xs">Cancelar</button>
                             </form>

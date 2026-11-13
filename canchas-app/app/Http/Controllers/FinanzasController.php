@@ -42,7 +42,7 @@ class FinanzasController extends Controller
         $totalVentasHoy   = $ventasHoy->sum('total');
         $totalDia         = $totalReservasHoy + $totalVentasHoy;
 
-        return view('dashboard', compact(
+        return view('admin.dashboard', compact(
             'reservasHoy', 'ventasHoy', 'totalReservasHoy',
             'totalVentasHoy', 'totalDia', 'reservasPendientes', 'proximasReservas'
         ));

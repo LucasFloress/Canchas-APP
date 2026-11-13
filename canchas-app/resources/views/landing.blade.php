@@ -64,6 +64,42 @@
         }
         .cancha-card:hover { border-color: var(--green); transform: translateY(-3px); }
 
+        
+        /* ── Decoraciones Flotantes ── */
+        .ornament {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.15; /* Sutil, como marca de agua */
+            pointer-events: none; /* Para que no interfiera con los clics en las tarjetas */
+            transition: transform 0.5s ease;
+        }
+
+        .ornament-1 {
+        bottom: -50px;
+        right: -150px; /* Lo tira bien a la derecha, fuera de la tarjeta */
+        width: 380px;
+        opacity: 0.05; /* Casi imperceptible */
+        transform: rotate(-15deg);
+        }
+        
+        .ornament-2 {
+            top: -40px;    /* Lo sube por encima de la primera tarjeta */
+            left: -150px;  /* Lo saca hacia el margen izquierdo */
+            width: 280px;
+            opacity: 0.05;
+            transform: rotate(20deg);
+        }
+
+        /* Pequeña animación flotante opcional */
+        @keyframes floatSticker {
+            0% { transform: translateY(0px) rotate(-15deg); }
+            50% { transform: translateY(-15px) rotate(-12deg); }
+            100% { transform: translateY(0px) rotate(-15deg); }
+        }
+        .ornament-1 {
+            animation: floatSticker 8s ease-in-out infinite;
+        }
+
         /* ── Formulario ── */
         .form-wrap {
             background: var(--card);
@@ -161,11 +197,12 @@
 {{-- ═══════════════════════════════════════ --}}
 {{-- NUESTRAS CANCHAS                        --}}
 {{-- ═══════════════════════════════════════ --}}
-<section id="canchas" class="py-20 px-4 max-w-5xl mx-auto">
-    <p class="text-xs uppercase tracking-widest mb-2" style="color: var(--green);">Instalaciones</p>
-    <h2 class="text-4xl md:text-5xl text-white mb-12">Nuestras canchas</h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<section id="canchas" class="py-20 px-4 w-full relative overflow-hidden">
+    <div class="max-w-5xl mx-auto relative z-10"> {{-- Envolvemos el contenido --}}
+        <p class="text-xs uppercase tracking-widest mb-2" style="color: var(--green);">Instalaciones</p>
+        <h2 class="text-4xl md:text-5xl text-white mb-12">Nuestras canchas</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach($canchas as $cancha)
         <div class="cancha-card rounded-2xl p-6">
             {{-- Ícono campo --}}
@@ -194,12 +231,26 @@
         </div>
         @endforeach
     </div>
+    <img src="{{ asset('image/pelota-sticker.png') }}" alt="Pelota" class="ornament ornament-1">
+    <img src="{{ asset('image/botines-sticker.png') }}" alt="Botines" class="ornament ornament-2 hidden md:block">
 </section>
 
 {{-- ═══════════════════════════════════════ --}}
 {{-- FORMULARIO DE RESERVA                   --}}
 {{-- ═══════════════════════════════════════ --}}
-<section id="reservar" class="py-20 px-4">
+<section id="reservar" class="py-20 px-4 relative" style="
+    background-image: 
+        linear-gradient(
+            to bottom, 
+            rgba(10, 10, 10, 1) 0%,      /* Corte superior fundido con la sección anterior */
+            rgba(10, 10, 10, 0.6) 15%,   /* Aclara para dejar ver las luces */
+            rgba(10, 10, 10, 0.6) 85%,   /* Mantiene el brillo en el medio */
+            rgba(10, 10, 10, 1) 100%     /* Corte inferior fundido con el footer */
+        ), 
+        url('{{ asset('image/Cancha de Futsal Nocturna.png') }}');
+    background-size: cover;
+    background-position: center center;
+">
     <div class="max-w-lg mx-auto">
 
         <p class="text-xs uppercase tracking-widest mb-2" style="color: var(--green);">Reservas online</p>
@@ -357,9 +408,17 @@
             <p class="text-sm mt-1" style="color: #555;">Lunes a domingo · 8:00–23:00</p>
         </div>
         <div>
-            <a href="{{ url('/admin/login') }}" class="text-2xl cursor-pointer" style="color: var(--green);">
-                Iniciar Sesión
-            </a>
+            @auth('admin')
+                {{-- Si Javi YA inició sesión, le mostramos el botón para ir directo al panel --}}
+                <a href="{{ route('admin.dashboard') }}" class="text-2xl cursor-pointer" style="color: var(--green);">
+                    Ir al Panel
+                </a>
+            @else
+                {{-- Si nadie inició sesión, mostramos el login normal --}}
+                <a href="{{ route('admin.login') }}" class="text-2xl cursor-pointer" style="color: var(--green);">
+                    Iniciar Sesión
+                </a>
+            @endauth
         </div>
     </div>
     <p class="text-center text-xs mt-10" style="color: #333;">© {{ date('Y') }} Canchas Javi. Todos los derechos reservados.</p>
