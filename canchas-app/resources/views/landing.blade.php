@@ -302,7 +302,9 @@
                     <label class="form-label block mb-2">Fecha</label>
                     <input  type="date" name="fecha_reserva" id="input-fecha"
                             min="{{ date('Y-m-d') }}"
-                            class="form-input w-full px-4 py-3 rounded-xl text-sm" required>
+                            onclick="this.showPicker()"
+                            onkeydown="return false;"
+                            class="form-input w-full px-4 py-3 rounded-xl text-sm cursor-pointer" required>
                     @error('fecha_reserva') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
@@ -367,6 +369,14 @@
                     @error('cliente_nombre') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
+                {{-- ── AVISO DE SEÑA Y ALIAS ── --}}
+                <div class="mb-6 p-4 rounded-xl text-xs leading-relaxed" style="background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); color: #d4d4d4;">
+                    <p class="mb-2" style="color: var(--green); font-weight: 500;">⚠️ Importante para confirmar tu turno:</p>
+                    <p class="mb-2">Te recordamos que tu reserva quedará pendiente. Para que sea confirmada, debés transferir el <strong>10% del valor de la reserva</strong> como seña al siguiente alias:</p>
+                    <p class="text-sm font-bold text-white mb-2 select-all bg-black/40 px-3 py-1.5 rounded-lg border border-neutral-800 inline-block">tiago.iruss</p>
+                    <p style="color: #888;">Muchas gracias, ¡Los esperamos!</p>
+                </div>
+
                 @if ($errors->any())
                 <div class="mb-4 p-3 rounded-lg text-xs" style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #f87171;">
                     @foreach ($errors->all() as $error)
@@ -377,7 +387,7 @@
 
                 <button type="submit"
                         class="btn-green w-full py-3.5 rounded-xl text-sm font-medium">
-                    Confirmar reserva ✓
+                    Enviar reserva ✓
                 </button>
 
                 <p class="text-center text-xs mt-4" style="color: #444;">

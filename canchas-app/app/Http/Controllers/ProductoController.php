@@ -54,7 +54,7 @@ class ProductoController extends Controller
 
         Producto::create($request->only('nombre', 'categoria', 'stock', 'precio'));
 
-        return redirect()->route('productos.index')->with('success', 'Producto creado correctamente.');
+        return redirect()->route('admin.productos.index')->with('success', 'Producto creado correctamente.');
     }
 
     public function edit(Producto $producto)
@@ -73,13 +73,13 @@ class ProductoController extends Controller
 
         $producto->update($request->only('nombre', 'categoria', 'stock', 'precio'));
 
-        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
+        return redirect()->route('admin.productos.index')->with('success', 'Producto actualizado correctamente.');
     }
 
     public function destroy(Producto $producto)
     {
         $producto->delete();
-        return redirect()->route('productos.index')->with('success', 'Producto eliminado.');
+        return redirect()->route('admin.productos.index')->with('success', 'Producto eliminado.');
     }
 
     public function show(Producto $producto)

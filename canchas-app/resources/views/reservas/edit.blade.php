@@ -12,7 +12,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('reservas.update', $reserva) }}" method="POST" class="space-y-4">
+            <form action="{{ route('admin.reservas.update', $reserva) }}" method="POST" class="space-y-4">
                 @csrf
                 @method('PUT')
 
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="flex justify-end gap-3 pt-2">
-                    <a href="{{ route('reservas.index') }}" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50">Cancelar</a>
+                    <a href="{{ route('admin.reservas.index') }}" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50">Cancelar</a>
                     <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Actualizar Reserva</button>
                 </div>
             </form>

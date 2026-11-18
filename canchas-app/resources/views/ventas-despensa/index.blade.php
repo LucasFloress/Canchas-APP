@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="text-xl font-semibold text-gray-800">Ventas - Despensa</h2>
-            <a href="{{ route('ventas-despensa.create') }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">+ Nueva Venta</a>
+            <a href="{{ route('admin.ventas-despensa.create') }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">+ Nueva Venta</a>
         </div>
     </x-slot>
 
@@ -37,7 +37,7 @@
                             </span>
                         </td>
                         <td class="px-6 py-4">
-                            <form action="{{ route('ventas-despensa.destroy', $venta) }}" method="POST" onsubmit="return confirm('¿Anular esta venta? Se restaurará el stock.')">
+                            <form action="{{ route('admin.ventas-despensa.destroy', $venta) }}" method="POST" onsubmit="return confirm('¿Anular esta venta? Se restaurará el stock.')">
                                 @csrf @method('DELETE')
                                 <button class="text-red-500 hover:underline text-xs">Anular</button>
                             </form>

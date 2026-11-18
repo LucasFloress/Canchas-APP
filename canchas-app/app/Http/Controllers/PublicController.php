@@ -115,7 +115,7 @@ class PublicController extends Controller
         ]);
 
         return redirect()->route('landing')->with('success',
-            '¡Reserva confirmada, ' . $validated['cliente_nombre'] . '! Te esperamos.'
+            '¡Reserva enviada, ' . $validated['cliente_nombre'] . '! Te esperamos.'
         );
     }
 }

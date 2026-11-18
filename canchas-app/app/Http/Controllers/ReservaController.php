@@ -49,7 +49,7 @@ class ReservaController extends Controller
         $validated['estado_reserva'] = 'reservado';
         Reserva::create($validated);
 
-        return redirect()->route('reservas.index')->with('success', 'Reserva creada correctamente.');
+        return redirect()->route('admin.reservas.index')->with('success', 'Reserva creada correctamente.');
     }
     public function show(Reserva $reserva)
     {
@@ -92,11 +92,11 @@ class ReservaController extends Controller
         $validated['monto_senia'] = $validated['monto_senia'] ?? 0;
         $reserva->update($validated);
 
-        return redirect()->route('reservas.index')->with('success', 'Reserva actualizada correctamente.');
+        return redirect()->route('admin.reservas.index')->with('success', 'Reserva actualizada correctamente.');
     }
     public function destroy(Reserva $reserva)
     {
         $reserva->update(['estado_reserva' => 'cancelado']);
-        return redirect()->route('reservas.index')->with('success', 'Reserva cancelada.');
+        return redirect()->route('admin.reservas.index')->with('success', 'Reserva cancelada.');
     }
 }

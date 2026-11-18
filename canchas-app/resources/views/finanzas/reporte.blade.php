@@ -10,7 +10,7 @@
 
         {{-- Filtros --}}
         <div class="bg-white rounded-2xl shadow p-6">
-            <form action="{{ route('finanzas.reporte') }}" method="GET" class="flex flex-wrap gap-4 items-end">
+            <form action="{{ route('admin.finanzas.reporte') }}" method="GET" class="flex flex-wrap gap-4 items-end">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Período</label>
                     <select name="periodo" class="border-gray-300 rounded-lg shadow-sm text-sm">

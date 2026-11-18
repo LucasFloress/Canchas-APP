@@ -12,7 +12,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('ventas-despensa.store') }}" method="POST" class="space-y-4">
+            <form action="{{ route('admin.ventas-despensa.store') }}" method="POST" class="space-y-4">
                 @csrf
 
                 <div>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="flex justify-end gap-3 pt-2">
-                    <a href="{{ route('ventas-despensa.index') }}" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50">Cancelar</a>
+                    <a href="{{ route('admin.ventas-despensa.index') }}" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50">Cancelar</a>
                     <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Registrar Venta</button>
                 </div>
             </form>

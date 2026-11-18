@@ -48,22 +48,22 @@ class VentaDespensaController extends Controller
         // Descontar stock automáticamente
         $producto->decrement('stock', $request->cantidad);
 
-        return redirect()->route('ventas-despensa.index')->with('success', 'Venta registrada correctamente.');
+        return redirect()->route('admin.ventas-despensa.index')->with('success', 'Venta registrada correctamente.');
     }
 
     public function show(VentaDespensa $ventaDespensa)
     {
-        return redirect()->route('ventas-despensa.index');
+        return redirect()->route('admin.ventas-despensa.index');
     }
 
     public function edit(VentaDespensa $ventaDespensa)
     {
-        return redirect()->route('ventas-despensa.index');
+        return redirect()->route('admin.ventas-despensa.index');
     }
 
     public function update(Request $request, VentaDespensa $ventaDespensa)
     {
-        return redirect()->route('ventas-despensa.index');
+        return redirect()->route('admin.ventas-despensa.index');
     }
 
     public function destroy($id)
@@ -81,7 +81,7 @@ class VentaDespensaController extends Controller
         // 3. Eliminamos el registro de la venta
         $venta->delete();
 
-        return redirect()->route('ventas-despensa.index')
+        return redirect()->route('admin.ventas-despensa.index')
             ->with('success', 'Venta eliminada correctamente.');
     }
 }

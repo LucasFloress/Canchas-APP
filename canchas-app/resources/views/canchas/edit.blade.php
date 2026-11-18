@@ -91,7 +91,7 @@
         {{-- TOP HEADER --}}
         <header class="bg-white h-16 shadow-sm border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-20">
             <div class="flex items-center gap-3">
-                <a href="{{ route('canchas.index') }}" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <a href="{{ route('admin.canchas.index') }}" class="text-gray-400 hover:text-gray-600 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 </a>
                 <div>
@@ -100,14 +100,14 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <form action="{{ route('canchas.destroy', $cancha) }}" method="POST"
+                <form action="{{ route('admin.canchas.destroy', $cancha) }}" method="POST"
                     onsubmit="return confirm('¿Eliminar {{ $cancha->numero_o_nombre }}? Esta acción no se puede deshacer.')">
                     @csrf @method('DELETE')
                     <button type="submit" class="text-red-600 hover:text-red-800 hover:underline text-sm font-medium transition-colors">
                         Eliminar cancha
                     </button>
                 </form>
-                <a href="{{ route('canchas.index') }}" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium text-sm">
+                <a href="{{ route('admin.canchas.index') }}" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium text-sm">
                     Cancelar
                 </a>
             </div>
@@ -169,7 +169,7 @@
                         <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wider">Modificar Datos</h2>
                     </div>
 
-                    <form action="{{ route('canchas.update', $cancha) }}" method="POST" class="p-6 space-y-5">
+                    <form action="{{ route('admin.canchas.update', $cancha) }}" method="POST" class="p-6 space-y-5">
                         @csrf
                         @method('PUT')
 
@@ -213,7 +213,7 @@
 
                         {{-- Botones --}}
                         <div class="flex justify-end gap-3 pt-2">
-                            <a href="{{ route('canchas.index') }}" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium text-sm">
+                            <a href="{{ route('admin.canchas.index') }}" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium text-sm">
                                 Cancelar
                             </a>
                             <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm flex items-center gap-2">
